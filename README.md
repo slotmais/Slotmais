@@ -1,16 +1,17 @@
-## Hi there 👋
+# SlotMais - O Cassino Online de Slots do Brasil 💰🎰
 
-<!--
-**slotmais/Slotmais** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+O **SlotMais** é um cassino online fictício criado com HTML, CSS e JavaScript, inspirado no estilo profissional do cassino.bet.
 
-Here are some ideas to get you started:
+🎯 Funcionalidades:
+- Login/Cadastro simulado
+- Sistema de saldo e depósito (simulado)
+- Roleta de bônus animada
+- Jogos interativos (slots)
+- Interface responsiva moderna
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+💡 Este projeto é ideal como base para criar um cassino real conectando a:
+- Backend Node.js
+- Banco de dados MongoDB
+- Provedores reais (Pragmatic Play, BGaming, etc.)
+
+🚀 Em breve será implantado e atualizado com novas funcionalidades!
