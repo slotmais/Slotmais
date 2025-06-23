@@ -1,0 +1,532 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlotMais - O Cassino de Slots do Brasil</title>
+  <meta name="description" content="SlotMais - O melhor cassino de slots do Brasil. Bônus, giros grátis, pagamentos instantâneos e prêmios reais." />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #1b0f2b, #0d0d0d); 
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.85);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header img {
+      max-height: 50px;
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: gold;
+    }
+
+    .btn-top,
+    .auth-btn {
+      background-color: gold;
+      color: #1b0f2b;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+      margin-left: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-top:hover,
+    .auth-btn:hover {
+      background-color: #ffc107cc;
+    }
+
+    main {
+      flex-grow: 1;
+      margin-top: 80px;
+      padding: 0 2rem 3rem;
+    }
+
+    .hero {
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: gold;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-btn {
+      background-color: gold;
+      color: #1b0f2b;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #ffc107cc;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .feature {
+      background-color: #2b1f3a;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      width: 250px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: scale(1.05);
+    }
+
+    .feature h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .games {
+      background-color: #140b1f;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .games h2 {
+      color: gold;
+      margin-bottom: 2rem;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background-color: #24162f;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 6px #330066;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px gold;
+    }
+
+    .game-image-svg {
+      width: 150px;
+      height: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .game-card button {
+      width: 100%;
+      padding: 0.7rem;
+      background-color: gold;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .game-card button:hover {
+      background-color: #ffc107cc;
+    }
+
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .features,
+      .game-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      .feature,
+      .game-card {
+        width: 90%;
+      }
+    }
+
+    /* Modal styles... (same as before) */
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo">
+  <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#ffcc00;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#ff3399;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+
+    <!-- Slot Machine -->
+    <rect x="10" y="15" rx="5" ry="5" width="60" height="50" fill="#1a1a1a" stroke="#fff" stroke-width="2"/>
+    
+    <!-- Reels -->
+    <rect x="20" y="25" rx="3" ry="3" width="15" height="30" fill="url(#grad1)" />
+    <rect x="40" y="25" rx="3" ry="3" width="15" height="30" fill="url(#grad1)" />
+    <rect x="60" y="25" rx="3" ry="3" width="15" height="30" fill="url(#grad1)" />
+
+    <!-- Texto SlotMais -->
+    <text x="90" y="50" font-family="'Orbitron', sans-serif" font-size="24" fill="gold">Slot</text>
+    <text x="150" y="50" font-family="'Orbitron', sans-serif" font-size="24" fill="white">Mais</text>
+
+    <!-- Moeda dourada -->
+    <circle cx="70" cy="20" r="8" fill="gold" stroke="#d4af37" stroke-width="2"/>
+    <text x="66" y="24" font-family="'Orbitron', sans-serif" font-size="10" fill="#1b0f2b" font-weight="bold">$</text>
+  </svg>
+</a>
+    <nav>
+      <a href="#home">Início</a>
+      <a href="#slots">Slots</a>
+      <a href="#live-casino">Cassino ao Vivo</a>
+      <a href="#promotions">Promoções</a>
+      <a href="#support">Suporte</a>
+    </nav>
+    <div>
+      <button id="login-btn" class="auth-btn">Login</button>
+      <button id="register-btn" class="auth-btn">Cadastro</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero" id="home">
+      <h1>Bem-vindo ao SlotMais!</h1>
+      <p>O melhor cassino de slots do Brasil. Bônus, giros grátis e prêmios reais!</p>
+      <button class="cta-btn" id="play-now-btn">Jogar Agora</button>
+    </section>
+
+    <!-- Promoções -->
+    <section class="promotions" id="promotions">
+      <h2>Promoções Exclusivas</h2>
+      <div class="promo-grid">
+        <div class="promo-card">
+          <h3>100% até R$500</h3>
+          <p>Bônus de boas-vindas para novos jogadores.</p>
+          <button onclick="alert('Funcionalidade em breve!')">Reivindicar</button>
+        </div>
+        <div class="promo-card">
+          <h3>Giros Grátis Diários</h3>
+          <p>Ganhe até 50 giros gratuitos toda semana.</p>
+          <button onclick="alert('Funcionalidade em breve!')">Ver Detalhes</button>
+        </div>
+        <div class="promo-card">
+          <h3>Cashback 10%</h3>
+          <p>Recupere parte do seu saldo perdido.</p>
+          <button onclick="alert('Funcionalidade em breve!')">Saber Mais</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jogos por Categoria -->
+    <section class="game-categories" id="slots">
+      <h2>Jogos Populares</h2>
+      <div class="category-tabs">
+        <button data-category="all" class="active">Todos</button>
+        <button data-category="slots">Caça-Níqueis</button>
+        <button data-category="live">Cassino Ao Vivo</button>
+        <button data-category="jackpot">Jackpot</button>
+      </div>
+      <div class="game-grid" id="game-grid">
+        <!-- Jogo Frutas -->
+        <div class="game-card" data-category="slots">
+          <svg class="game-image-svg" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <rect width="150" height="100" fill="#ff6666" rx="15" ry="15"/>
+            <circle cx="40" cy="50" r="20" fill="yellow" />
+            <circle cx="75" cy="50" r="20" fill="red" />
+            <circle cx="110" cy="50" r="20" fill="orange" />
+          </svg>
+          <button>Jogar</button>
+        </div>
+        <!-- Jogo Diamante -->
+        <div class="game-card" data-category="slots">
+          <svg class="game-image-svg" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <rect width="150" height="100" fill="#0099cc" rx="15" ry="15"/>
+            <polygon points="75,20 110,50 75,80 40,50" fill="cyan" stroke="white" stroke-width="3"/>
+          </svg>
+          <button>Jogar</button>
+        </div>
+        <!-- Jogo Egito -->
+        <div class="game-card" data-category="slots">
+          <svg class="game-image-svg" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <rect width="150" height="100" fill="#996633" rx="15" ry="15"/>
+            <path d="M 40 80 L 75 20 L 110 80 Z" fill="gold" stroke="#552200" stroke-width="3"/>
+            <rect x="65" y="50" width="20" height="20" fill="#aa7733" />
+          </svg>
+          <button>Jogar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Área do Usuário -->
+    <section id="user-panel">
+      <h2>Bem-vindo, <span id="user-name"></span>!</h2>
+      <div id="balance-section">
+        <h3>Seu saldo atual:</h3>
+        <div id="balance">R$ 0,00</div>
+        <form id="deposit-form">
+          <input type="number" id="deposit-amount" placeholder="Ex: 50" min="1" required />
+          <button type="submit">Depositar</button>
+        </form>
+        <div id="history">
+          <p><em>Histórico vazio.</em></p>
+        </div>
+      </div>
+      <button id="logout-btn">Sair</button>
+    </section>
+
+    <!-- Modal Login/Cadastro -->
+    <div class="modal-bg" id="modal-bg">
+      <div class="modal">
+        <button class="close-btn" id="modal-close">&times;</button>
+        <h2 id="modal-title">Login</h2>
+        <form id="auth-form">
+          <label for="username">Usuário:</label>
+          <input type="text" id="username" autocomplete="username" required minlength="4" maxlength="20" pattern="[\w]{4,20}" />
+          <label for="password">Senha:</label>
+          <input type="password" id="password" autocomplete="current-password" required minlength="6" />
+          <div id="auth-message"></div>
+          <button type="submit" id="submit-btn">Entrar</button>
+        </form>
+        <p id="toggle-auth-text">Não tem conta?</p>
+        <button id="toggle-auth-btn">Cadastre-se</button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 SlotMais. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    // Função para chamar a API
+    async function callApi(endpoint, method = 'GET', body = null) {
+      const options = {
+        method,
+        headers: { 'Content-Type': 'application/json' }
+      };
+      if (body) options.body = JSON.stringify(body);
+
+      const res = await fetch(`https://seu-backend.onrender.com/api${endpoint}`,  options);
+      return await res.json();
+    }
+
+    // Elementos do DOM
+    const loginBtn = document.getElementById('login-btn');
+    const registerBtn = document.getElementById('register-btn');
+    const modalBg = document.getElementById('modal-bg');
+    const modalCloseBtn = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const toggleAuthText = document.getElementById('toggle-auth-text');
+    const toggleAuthBtn = document.getElementById('toggle-auth-btn');
+    const authForm = document.getElementById('auth-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const authMessage = document.getElementById('auth-message');
+    const userPanel = document.getElementById('user-panel');
+    const userNameSpan = document.getElementById('user-name');
+    const logoutBtn = document.getElementById('logout-btn');
+    const depositForm = document.getElementById('deposit-form');
+    const depositAmountInput = document.getElementById('deposit-amount');
+    const balanceDiv = document.getElementById('balance');
+    const historyDiv = document.getElementById('history');
+
+    let isLogin = true;
+
+    // Funções de controle de modal
+    function openModal(loginMode = true) {
+      isLogin = loginMode;
+      modalTitle.textContent = loginMode ? 'Login' : 'Cadastro';
+      submitBtn.textContent = loginMode ? 'Entrar' : 'Cadastrar';
+      toggleAuthText.textContent = loginMode ? 'Não tem conta?' : 'Já tem conta?';
+      toggleAuthBtn.textContent = loginMode ? 'Cadastre-se' : 'Faça login';
+      authMessage.textContent = '';
+      authForm.reset();
+      modalBg.classList.add('active');
+    }
+
+    // Validação de campos
+    function validateUsername(username) {
+      return /^[\w]{4,20}$/.test(username);
+    }
+
+    function validatePassword(password) {
+      return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
+    }
+
+    // Eventos de login/cadastro
+    loginBtn.addEventListener('click', () => openModal(true));
+    registerBtn.addEventListener('click', () => openModal(false));
+    modalCloseBtn.addEventListener('click', () => modalBg.classList.remove('active'));
+    modalBg.addEventListener('click', e => {
+      if (e.target === modalBg) modalBg.classList.remove('active');
+    });
+    toggleAuthBtn.addEventListener('click', () => openModal(!isLogin));
+
+    // Submissão do formulário
+    authForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const username = authForm.username.value.trim();
+      const password = authForm.password.value;
+
+      if (!validateUsername(username)) {
+        authMessage.textContent = 'Usuário inválido.';
+        return;
+      }
+      if (!validatePassword(password)) {
+        authMessage.textContent = 'Senha inválida.';
+        return;
+      }
+
+      const url = isLogin ? '/auth/login' : '/auth/register';
+      const data = await callApi(url, 'POST', { username, password });
+
+      if (data.error) {
+        authMessage.textContent = data.error;
+      } else {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('username', data.user.username);
+        updateBalanceUI(data.user.balance);
+        loginSuccess(data.user.username);
+      }
+    });
+
+    function loginSuccess(username) {
+      userNameSpan.textContent = username;
+      userPanel.classList.add('active');
+      modalBg.classList.remove('active');
+    }
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      userPanel.classList.remove('active');
+    });
+
+    function updateBalanceUI(balance) {
+      balanceDiv.textContent = `R$ ${balance.toFixed(2)}`;
+    }
+
+    // Depósito via API
+    depositForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const amount = parseFloat(depositAmountInput.value);
+      if (isNaN(amount) || amount <= 0) {
+        alert('Informe um valor válido.');
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      const res = await fetch('https://seu-backend.onrender.com/api/user/deposit',  {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ amount })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        updateBalanceUI(data.balance);
+        alert('Depósito realizado!');
+      } else {
+        alert('Erro ao depositar.');
+      }
+    });
+
+    // Carregar dados do usuário logado
+    window.addEventListener('load', () => {
+      const username = localStorage.getItem('username');
+      if (username) {
+        const token = localStorage.getItem('token');
+        fetch('https://seu-backend.onrender.com/api/user/profile',  {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(res => res.json())
+          .then(data => {
+            updateBalanceUI(data.balance);
+            loginSuccess(username);
+          });
+      }
+    });
+
+  </script>
+
+</body>
+</html>
